@@ -1,22 +1,15 @@
 class Solution {
 public:
-ListNode *detectCycle(ListNode *head) {
-    if(!head || !head->next)   return NULL;   
-    ListNode *s=head, *f=head, *st=head;
-    while(f->next && f->next->next)
-    {
-        s = s->next;
-        f = f->next->next;
-        if(s==f)
+    bool hasCycle(ListNode *head) {
+        if(head == NULL) return false;
+        ListNode *fast = head;
+        ListNode *slow = head;
+        while(fast != NULL && fast ->next != NULL)
         {
-            while(s != st)
-            {
-                s = s->next;
-                st = st->next;
-            }
-            return st;
+            fast = fast->next->next;
+            slow = slow->next;
+            if(fast == slow) return true;
         }
+        return false;
     }
-    return NULL;
-}
 };
